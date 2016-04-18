@@ -17,35 +17,30 @@ angular.module('marathonpacers.activerun.controllers', [])
 
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
-    $scope.session = {};
 
+    /*Initialize Session */
+    $scope.session = {};
+    $scope.session.elapsed ="Test";
+    $scope.session.runTimer = new RunTimer();
     startTimer();
     
-    function startTimer () {
-      $scope.session.duration = moment.duration(0);
-      $scope.session.lapDuration = moment.duration(0);
-      $scope.session.savedTime = new Date().getTime();
 
+    //TODO: Need to figure out how this can go into RunTimer class
+    function startTimer () {
+      /* Initialize the Timer for the run */
       $scope.session.elapsedTimer = $interval(function () {
-        var difference = new Date().getTime() - $scope.session.savedTime; 
-        $scope.session.duration.add(difference, 'ms');
-        $scope.session.durationSeconds = $scope.session.duration.asSeconds();
-        $scope.session.lapDuration.add(difference,'ms');
-        $scope.session.lapDurationSeconds = $scope.session.lapDuration.asSeconds();
-        $scope.session.savedTime = new Date().getTime();
-        $scope.session.elapsed = getDurationString($scope.session.duration);
+        /* Initialize the Timer for the run */
+        $scope.session.runTimer.tick();
+        //$scope.session.elapsed = runTimer.durationString();
       }, 500);
     }
 
 
  function stopTimer ()
   {
-      if (angular.isDefined($scope.session.elapsedTimer)) {
-        $interval.cancel($scope.session.elapsedTimer);
-        $scope.session.elapsedTimer = undefined;
-      }
+      
       //resetSession();
-    }
+  }
 
 
 
