@@ -1,0 +1,91 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-dark">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-content>
+    <!--<img class="full-image" src="https://pixabay.com/static/uploads/photo/2016/03/09/09/08/running-1245640_960_720.jpg">-->
+    <div style="background: url(https://pixabay.com/static/uploads/photo/2016/02/05/22/39/track-1182233_960_720.jpg) center; background-size: cover;">
+
+          <ion-list>
+            <ion-item >&nbsp;</ion-item>
+            <ion-item >&nbsp;</ion-item>
+            <strong style="color:white;padding-left:5px">Aditya Talwalkar</strong>
+        </ion-list>
+    </div>
+        <!--  <ion-list>
+
+        <ion-item menu-close href="#/app/home">
+          Home
+        </ion-item>
+        <ion-item menu-close href="#/app/myruns">
+          History
+        </ion-item>
+        <ion-item menu-close href="#/app/myruns">
+          Training Plan
+        </ion-item>
+        <ion-item menu-close href="#/app/runningform">
+          Running Form
+        </ion-item>
+        <ion-item menu-close href="#/app/myruns">
+         Route Detail
+        </ion-item>
+        <ion-item menu-close href="#/app/myruns">
+         About Us
+        </ion-item>
+        <ion-item menu-close ng-click="logout()">
+         Logout
+        </ion-item>
+
+      </ion-list> -->
+      <div class="list redtext">
+
+  <a class="item item-icon-left" href="#/app/home">
+    <i class="icon ion-home"></i>
+    Home
+  </a>
+
+<a class="item item-icon-left" href="#/app/myruns">
+    <i class="icon ion-arrow-graph-up-right"></i>
+    History
+  </a>
+
+  <a class="item item-icon-left" href="#/app/home">
+    <i class="icon ion-person-stalker"></i>
+    Training Plan
+  </a>
+
+  <a class="item item-icon-left" href="#/app/runningform">
+    <i class="icon ion-ios-body-outline"></i>
+    Running Form
+  </a>
+
+  <a class="item item-icon-left" href="#/app/home">
+    <i class="icon ion-arrow-swap"></i>
+    Route Detail
+  </a>
+
+  <a class="item item-icon-left" href="#/app/home">
+    <i class="icon ion-ios-people-outline"></i>
+    About Us
+  </a>
+
+  <a class="item item-icon-left" ng-click="logout()">
+    <i class="icon ion-log-out"></i>
+    Logout
+  </a>
+
+</div>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

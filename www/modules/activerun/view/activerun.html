@@ -1,0 +1,49 @@
+<ion-view view-title="Active Run" hide-nav-bar="true" class="animate-fade-slide-in">
+  <ion-content has-header="false" style="background: url(http://static.panoramio.com/photos/large/9356619.jpg) center; background-size: cover;">
+    
+<!--
+https://pixabay.com/static/uploads/photo/2012/02/29/15/52/track-19217_960_720.jpg
+    <div class="item card-item" ng-repeat="activerun in activeruns">
+            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap">
+                    
+                    <strong>{{activerun.title}}</strong> knows nothing.
+                    <div class="card-footer text-right">
+                        <i class="icon ion-chatbubbles positive"></i> 6
+                        <i class="icon ion-heart assertive"></i> 23
+                        <div class="pull-left">
+                            <i class="icon ion-clock"></i> just now
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+-->
+
+    <div class="list responsive-sm">
+                <div class="item centeralign" style="padding-bottom:30px">
+
+                    <img class="full-image rounded" src="http://www.satarahillmarathon.com/img/Logo1.png">
+                </div>
+
+
+                <div class="item verylargetext centeralign tall">2.96</div>
+                <div class="item largetext centeralign">km</div>
+                <div class="item row largetext  centeralign">
+                        <div class="col">
+                            <i class="icon ion-android-stopwatch"></i> {{session.elapsed}}
+                        </div>
+                        <div class="col">
+                            <i class="icon ion-speedometer"></i> 8'01"
+                        </div>
+                </div>
+                <div class="item centeralign">  <button id="stop-run" class="button button-fab  button-energized-900 icon ion-stop button-raised" style="width:100px;height:100px" ng-click="stopRun()"></div>
+    </div>
+
+
+
+	
+</button>
+
+  </ion-content>
+</ion-view>

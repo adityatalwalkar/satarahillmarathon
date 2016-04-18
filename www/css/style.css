@@ -1,0 +1,57 @@
+/* Empty. Add your own CSS if you like */
+.app-icon {
+    height: 140px;
+    margin: 0 auto;
+    width: 250px;
+
+}
+
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    
+    
+    display: block;
+}
+
+.centeralign
+{
+	text-align: center !important;
+}
+.verylargetext
+{
+	font-size:100px !important;
+	font-weight: 900;
+	color:white !important;
+	padding-top:30px;
+	padding-bottom:30px
+}
+.largetext
+{
+	font-size:30px !important;
+	font-weight: 900;
+	color:white !important;
+}
+
+
+.runningScreen {
+	background: #83a4d4; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #83a4d4 , #b6fbff); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #83a4d4 , #b6fbff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.redtext {
+	color:#791F16 !important;
+}
+
+
+
+
+
+.bottomButtons{
+    position: fixed;
+    bottom: 0px;
+    right: 20px;
+    left: 20px;
+}

@@ -1,0 +1,23 @@
+<ion-view view-title="Run Detail"  class="animate-fade-slide-in">
+  <ion-content >
+    
+
+
+    <div class="item card-item" ng-repeat="activerun in activeruns">
+            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap">
+                    
+                    <strong>{{activerun.title}}</strong> knows nothing.
+                    <div class="card-footer text-right">
+                        <i class="icon ion-chatbubbles positive"></i> 6
+                        <i class="icon ion-heart assertive"></i> 23
+                        <div class="pull-left">
+                            <i class="icon ion-clock"></i> just now
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+  </ion-content>
+</ion-view>
