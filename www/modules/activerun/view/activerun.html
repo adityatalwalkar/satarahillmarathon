@@ -26,15 +26,15 @@ https://pixabay.com/static/uploads/photo/2012/02/29/15/52/track-19217_960_720.jp
                     <img class="full-image rounded" src="http://www.satarahillmarathon.com/img/Logo1.png">
                 </div>
 
-
-                <div class="item verylargetext centeralign tall">2.96</div>
+                    
+                <div class="item verylargetext centeralign tall">{{session.runner.distanceCoveredDisplay()}}</div>
                 <div class="item largetext centeralign">km</div>
                 <div class="item row largetext  centeralign">
                         <div class="col">
-                            <i class="icon ion-android-stopwatch"></i> {{session.runTimer.durationString()}}
+                            <i class="icon ion-android-stopwatch"></i> {{session.runner.runningDurationDisplay()}}
                         </div>
                         <div class="col">
-                            <i class="icon ion-speedometer"></i> 8'01"
+                            <i class="icon ion-speedometer"></i> {{session.runner.currentPaceDisplay()}}
                         </div>
                 </div>
                 <div class="item centeralign">  <button id="stop-run" class="button button-fab  button-energized-900 icon ion-stop button-raised" style="width:100px;height:100px" ng-click="stopRun()"></div>

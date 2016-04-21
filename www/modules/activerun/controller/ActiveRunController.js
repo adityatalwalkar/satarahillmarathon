@@ -1,6 +1,6 @@
 angular.module('marathonpacers.activerun.controllers', [])
 
-.controller('ActiveRunController', function($scope,speechService,ionicMaterialInk, ionicMaterialMotion, $ionicSideMenuDelegate, $timeout, $interval,$state) {
+.controller('ActiveRunController', function($scope,speechService,geoLocationService,runnerFactory,pacerFactory,ionicMaterialInk, ionicMaterialMotion, $ionicSideMenuDelegate, $timeout, $interval,$state) {
   speechService.announceMessage("Run Started");
 
 
@@ -20,37 +20,40 @@ angular.module('marathonpacers.activerun.controllers', [])
 
     /*Initialize Session */
     $scope.session = {};
-    $scope.session.elapsed ="Test";
-    $scope.session.runTimer = new RunTimer();
-    startTimer();
-    
 
-    //TODO: Need to figure out how this can go into RunTimer class
-    function startTimer () {
-      /* Initialize the Timer for the run */
-      $scope.session.elapsedTimer = $interval(function () {
-        /* Initialize the Timer for the run */
-        $scope.session.runTimer.tick();
-        //$scope.session.elapsed = runTimer.durationString();
-      }, 500);
+    
+    
+//    $scope.session.runner = runnerFactory.createRunner();
+      $scope.session.runner =pacerFactory.createPacer();
+    $scope.session.runner.startRun();
+    //geoLocationService.start(onChange, gpsError);
+
+
+
+    function onChange(newPosition) {
+//      $scope.session.runner.startRun();
+  //    $scope.session.runner.runTo(newPosition.coords);
     }
 
 
- function stopTimer ()
-  {
-      
-      //resetSession();
-  }
 
+    function gpsError(positionError) {
+      if(positionError.code == positionError.PERMISSION_DENIED)
+      {
+        $scope.session.showMessage = false;
+        $scope.session.errorMessage = "Error occured while getting your location.";
+      }
+      if(positionError.code == positionError.POSITION_UNAVAILABLE)
+      {
+        $scope.session.showMessage = false;
+        $scope.session.errorMessage = "The application could not connect to GPS.";
+      }
+      if(positionError.code == positionError.TIMEOUT)
+      {
+        $scope.session.showMessage = false;
+        $scope.session.errorMessage = "The application could not connect to GPS.";
+      }
+    }
 
-
-  $scope.activeruns = [
-    { title: 'Run 1', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
 })
 
