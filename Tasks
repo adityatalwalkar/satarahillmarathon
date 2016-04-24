@@ -1,0 +1,21 @@
+1. Display Training Plan - fetch from database
+2. Tip of Day - fetch from database
+3. Todays run - fetch from database (based on the training plan)
+4. Running Form - fetch from database 
+5. Add total miles on Running History
+6. Create Leader board - 
+	a. Show the leaderboard
+	b. Update the leaderboard
+7. Pacer Announcement - According to Settings
+8. Save Settings to local storage
+9. Add Route Detail
+10. Add Warmup/Stretching
+11. ios,windows phone deployment
+12. Graying out while GPS search is on
+13. Add information to About Us
+14. Splash Screen & Icon
+15. Run Pause/Resume
+16. Run Race button - No Internet Connection
+17. FAQ
+
+
