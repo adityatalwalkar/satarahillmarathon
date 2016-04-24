@@ -1,5 +1,5 @@
-<ion-view view-title="Active Run" hide-nav-bar="true" class="animate-fade-slide-in">
-  <ion-content has-header="false" style="background: url(http://static.panoramio.com/photos/large/9356619.jpg) center; background-size: cover;">
+<ion-view view-title="Active Run" hide-nav-bar="true" >
+  <ion-content has-header="false" style="background: url(img/background.jpg) center; background-size: cover;">
     
 <!--
 https://pixabay.com/static/uploads/photo/2012/02/29/15/52/track-19217_960_720.jpg
@@ -19,31 +19,81 @@ https://pixabay.com/static/uploads/photo/2012/02/29/15/52/track-19217_960_720.jp
             </div>
     </div>
 -->
+<ion-slide-box on-slide-changed="slideHasChanged($index)">
+  <ion-slide>
 
-    <div class="list responsive-sm">
-                <div class="item centeralign" style="padding-bottom:30px">
-
-                    <img class="full-image rounded" src="http://www.satarahillmarathon.com/img/Logo1.png">
-                </div>
-
-                    
-                <div class="item verylargetext centeralign tall">{{session.runner.distanceCoveredDisplay()}}</div>
-                <div class="item largetext centeralign">km</div>
-                <div class="item row largetext  centeralign">
-                        <div class="col">
-                            <i class="icon ion-android-stopwatch"></i> {{session.runner.runningDurationDisplay()}}
+            <div class="list responsive-sm animate-fade-slide-in">
+                        <div class="item centeralign noborder-item" style="padding-bottom:30px">
+                            <img class="full-image rounded" src="img/newlogo.png"/>
                         </div>
-                        <div class="col">
-                            <i class="icon ion-speedometer"></i> {{session.runner.currentPaceDisplay()}}
+
+                        <div class="item verylargetext centeralign tall noborder-item">{{session.runner.distanceCoveredDisplay()}}</div>
+                        <div class="item largetext centeralign noborder-item">km</div>
+                        <div class="item row largetext  centeralign noborder-item">
+                                <div class="col">
+                                    <i class="icon ion-android-stopwatch"></i> {{session.runner.runningDurationDisplay()}}
+                                </div>
+                                <div class="col">
+                                    <i class="icon ion-speedometer"></i> {{session.runner.currentPaceDisplay()}}
+                                </div>
                         </div>
+                        <div class="item centeralign noborder-item">  
+                            <button id="stop-run" class="button button-fab  button-energized-900 icon ion-stop button-raised" style="width:100px;height:100px" ng-click="stopRun()"></button>
+                            <button id="stop-run" class="button button-fab  button-calm-900 icon ion-pause button-raised" style="width:100px;height:100px" ng-click="testRun()"></button>
+                        </div>
+            </div>
+
+    </ion-slide> 
+
+    <ion-slide>
+            <div >
+                <div class="item card-item" ng-repeat="pacer in session.pacers">
+                <div class="card  ink ink-dark">
+                    <div class="item item-avatar item-text-wrap ">
+                        <span class="avatar" style="background-image: url('img/pacer.png');border-radius:5%;"></span>
+                        <h3>{{pacer.pacerName}} hrs pacer has run  {{pacer.distanceCoveredDisplay()}} km</h3> 
+                        <div class="card-footer ">
+                            <div class="pull-left">
+                                <i class="icon ion-speedometer"></i> {{pacer.currentPaceDisplay()}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="item centeralign">  <button id="stop-run" class="button button-fab  button-energized-900 icon ion-stop button-raised" style="width:100px;height:100px" ng-click="stopRun()"></div>
-    </div>
+        </div>
+ 
 
+            </div>
+    </ion-slide>
+   
+    <ion-slide>
+            <div >
+                 <h1 class = "verylargetext">Box 2</h1>
+            </div>
+    </ion-slide>
+    </ion-slide-box>	
 
-
-	
-</button>
 
   </ion-content>
 </ion-view>
+
+
+<!--<div>
+        <div class="item card-item" ng-repeat="pacer in session.pacers">
+                <div class="card  ink ink-dark">
+                    <div class="item item-avatar item-text-wrap">
+                        <span class="avatar" style="background-image: url('https://pixabay.com/static/uploads/photo/2016/01/19/17/27/football-1149718_960_720.jpg');"></span>
+                        <strong>{{pacer.pacerName}} has finished  {{pacer.distanceCoveredDisplay()}} </strong> 
+                        <div class="card-footer text-right">
+                            <i class="icon ion-chatbubbles positive"></i> 6
+                            <i class="icon ion-heart assertive"></i> 23
+                            <div class="pull-left">
+                                <i class="icon ion-clock"></i> {{
+                                 activerun.dateTime
+                                }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </div>
+-->

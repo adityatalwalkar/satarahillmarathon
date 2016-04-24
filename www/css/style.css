@@ -58,3 +58,14 @@
     right: 20px;
     left: 20px;
 }
+
+.noborder-item {
+	border:none;
+}
+
+.top-border
+{
+	border-top-color:#ddd !important;
+	border-top-style: solid !important;
+	border-top-width:1px !important;
+} 

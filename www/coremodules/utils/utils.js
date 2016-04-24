@@ -55,6 +55,89 @@ function convertDecimal (input, places) {
     };
 
 
+function speedToPace(speed) {
+    if(speed> 0)
+      return 60/speed;
+    else
+      speed = 0;
+}
+
+function calculateSpeed(distance,time) 
+{
+  var KMS_TO_KMH = 3600;
+  if(time == 0) 
+      return 0;
+  else 
+      return (distance / time) * KMS_TO_KMH;
+}
+
+
+function getShortPaceFromDecimal(longTime)
+{
+  if(!longTime) return "0' 0\"";
+  var min = Math.floor(longTime);
+  var decimal = longTime - min;
+  // 0.50 - 30
+  var secs = Math.floor(decimal * 60);
+  if(secs >= 10)
+      return min + "' " + secs + "\"";
+  else
+      return min + "' 0" + secs + "\"";
+}
+
+function getDecimalFromShort(longTime)
+{
+  var min = Math.floor(longTime);
+  var decimal = longTime - min;
+  // 0.50 - 30
+  var secs = Math.floor(decimal * 6/10);
+  return  parse(min+"." + secs);
+}
+
+function toTimeString(sec_num) {
+
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+    var message = "";
+    seconds = Math.floor(seconds);
+
+    if(hours > 0 )
+      message = hours+' hours ';
+    if(minutes > 0 )
+      message += minutes+' minutes ';
+    if(seconds > 0 )
+      message += seconds +' seconds ';
+    
+    return message;
+    
+}
+
+function distancetoLongString(difference)
+{
+      //var difference = pacer.distance - $scope.session.distance;
+        var absdifference = Math.floor(Math.abs(difference) * 1000);
+        var distanceMessage ="";
+
+        if(absdifference < 1000)
+        {
+          distanceMessage = absdifference + " meters"; 
+        }
+        else
+        {
+          var kms = Math.floor(absdifference/1000);
+          var meters = Math.floor((absdifference - (kms * 1000)));
+          distanceMessage = kms + " kilo meters and " + meters + " meters";
+        }
+        return distanceMessage;
+}
+
+
+var positions = [{coords:{latitude:12.931039, longitude:77.686632},speed:10},
+{coords:{latitude:12.934594, longitude:77.690580},speed:10},
+{coords:{latitude:12.937556, longitude:77.693695},speed:10}
+];
+
 var initialPacers = [
 
 

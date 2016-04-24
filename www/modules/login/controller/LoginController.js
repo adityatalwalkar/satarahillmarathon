@@ -1,53 +1,40 @@
 angular.module('marathonpacers.login.controllers', [])
 
-.controller('LoginController',  function ($scope, $timeout, $interval, $ionicPlatform, $state,$stateParams,FURL,Auth) {
+.controller('LoginController',  function ($scope, $timeout, $interval, $ionicPlatform, $state,$stateParams,$rootScope,FURL,Auth) {
   
   var ref = new Firebase(FURL);
   var userkey = "";
-  var onLogin = function(error,authData)
-  {
-          //Utils.hide();
-          if (error) {
-          console.log("Login Failed!", error);
-          
-          } 
-          else {
 
-            console.log("Authenticated successfully with payload:", authData);
-            $scope.isLoggedin = true;
-            //$localStorage.email = authData.facebook.email;
-            //console.log(authData.facebook.email);
-            //$localStorage.userkey = authData.uid;
-            $state.go('app.home');
-            //return authData;
-          }
+
+  $scope.$on('userloggedinsuccessfully',function(event,data)      {
+            console.log("User Logged in Successfully " + data.displayName);
+            $rootScope.isLoggedin = true;
+            $rootScope.LoggedInAs = "user";
+            $rootScope.displayName = data.displayName;
+            $state.go("app.home");
+  });
+
+  $scope.signInAsGuest = function () {
+          
+          $rootScope.isLoggedin = true;
+          $rootScope.LoggedInAs = "guest";
+          $rootScope.displayName = "Guest";
+          $state.go("app.home");
+  
   };
 
   $scope.signInWithFacebook = function () {
-    console.log("Enviado");
-    //Utils.show();
-    Auth.login("facebook",onLogin);
+    Auth.login("facebook");
   };
 
+
    $scope.signInWithTwitter = function () {
-    console.log("Enviado");
-    //Utils.show();
-    Auth.login("twitter",onLogin);
+    Auth.login("twitter");
   };
 
   $scope.signInWithGoogle = function () {
-    console.log("Enviado");
-    //Utils.show();
-    Auth.login("google",onLogin);
+    Auth.login("google");
   };
 
-  $scope.activeruns = [
-    { title: 'Home 1', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})
+  })
 

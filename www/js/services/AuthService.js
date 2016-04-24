@@ -1,4 +1,4 @@
-angular.module('marathonpacers.services').factory('Auth', function(FURL, $firebaseAuth, $firebaseArray, $firebaseObject) {
+angular.module('marathonpacers.services').factory('Auth', function(FURL, $firebaseAuth, $firebaseArray, $firebaseObject, $rootScope) {
 
 	var ref = new Firebase(FURL);
 	var auth = $firebaseAuth(ref);
@@ -11,13 +11,31 @@ angular.module('marathonpacers.services').factory('Auth', function(FURL, $fireba
         {email: user.email, password: user.password}
       );
     },*/
-    login: function(method,onReturn)
+    login: function(method)
     {
       
-      return ref.authWithOAuthPopup(method,onReturn,{
+/*      return ref.authWithOAuthPopup(method,onReturn,{
                 remember: "sessionOnly",
                 scope: "email"
-              });
+              }); */
+
+          ref.authWithOAuthPopup(method, function(error, authData) {
+            if (error) {
+              if (error.code === "TRANSPORT_UNAVAILABLE") {
+                // fall-back to browser redirects, and pick up the session
+                // automatically when we come back to the origin page
+                ref.authWithOAuthRedirect(method, function(error) { 
+
+                  if(authData)
+                    $rootScope.$broadcast("userloggedinsuccessfully",{displayName:getName(authData)});  
+
+                 });
+              }
+            } else if (authData) {
+              // user authenticated with Firebase
+                  $rootScope.$broadcast("userloggedinsuccessfully",{displayName:getName(authData)});  
+            }
+          });
     },
 
 
@@ -38,20 +56,27 @@ angular.module('marathonpacers.services').factory('Auth', function(FURL, $fireba
 	};
 
 	auth.$onAuth(function(authData) {
-		if(authData) {
-      angular.copy(authData, Auth.user);
-      Auth.user.profile = $firebaseObject(ref.child('profile').child(authData.uid));
-
-		} else {
-      if(Auth.user && Auth.user.profile) {
-        Auth.user.profile.$destroy();
-
+    	if (authData ) {
+        // save the user's profile into the database so we can list users,
+        // use them in Security and Firebase Rules, and show profiles
+        ref.child("users").child(authData.uid).set({
+          provider: authData.provider,
+          name: getName(authData)
+        });
       }
 
-      angular.copy({}, Auth.user);
-		}
-	});
+  });
 
+  function getName(authData) {
+    switch(authData.provider) {
+       case 'twitter':
+         return authData.twitter.displayName;
+       case 'facebook':
+         return authData.facebook.displayName;
+      case 'google':
+         return authData.google.displayName;
+    }
+  }
 	return Auth;
 
 });

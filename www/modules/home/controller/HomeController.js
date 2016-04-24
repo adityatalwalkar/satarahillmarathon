@@ -10,7 +10,7 @@ angular.module('marathonpacers.home.controllers', [])
    };
 
   $scope.tipOfDay = function(url) {
-	  window.open(url,  options)
+	  cordova.InAppBrowser.open(url,  options)
 		
       .then(function(event) {
          // success

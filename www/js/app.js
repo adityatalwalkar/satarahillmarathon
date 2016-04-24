@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('marathonpacers', ['ionic','ionic-material','marathonpacers.services', 'marathonpacers.controllers','marathonpacers.home.controllers','marathonpacers.activerun.controllers','marathonpacers.myruns.controllers','marathonpacers.myruns.detail.controllers','marathonpacers.runningform.controllers','marathonpacers.login.controllers','marathonpacers.activerun.services','firebase'])
+angular.module('marathonpacers', ['ionic','ionic-material','marathonpacers.services', 'marathonpacers.controllers','marathonpacers.home.controllers','marathonpacers.activerun.controllers','marathonpacers.myruns.controllers','marathonpacers.myruns.detail.controllers','marathonpacers.runningform.controllers','marathonpacers.login.controllers','marathonpacers.activerun.services','marathonpacers.settings.controllers','firebase'])
 .constant('FURL', 'https://satara-hill-marathon.firebaseio.com/')
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -91,6 +91,16 @@ var authenticated = ['$q', 'Auth', '$state','$timeout',function ($q, Auth,$state
       'menuContent': {
         templateUrl: 'modules/runningform/view/runningform.html',
         controller: 'RunningFormController'
+      }
+    }
+  })
+
+.state('app.settings', {
+    url: '/settings',
+    views: {
+      'menuContent': {
+        templateUrl: 'modules/settings/view/settings.html',
+        controller: 'SettingsController'
       }
     }
   })

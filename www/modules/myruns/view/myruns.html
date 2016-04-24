@@ -5,12 +5,10 @@
 
     <div class="item card-item" ng-repeat="activerun in activeruns">
             <div ui-sref="app.rundetail({runId:activerun.id})" class="card  ink ink-dark">
-                <div class="item item-avatar item-text-wrap">
-                    <span class="avatar" style="background-image: url('https://pixabay.com/static/uploads/photo/2016/01/19/17/27/football-1149718_960_720.jpg');"></span>
+                <div class="item item-avatar item-text-wrap top-border">
+                    <span class="avatar" style="background-image: url('img/shoes.jpg');border-radius:5%"></span>
                     <strong>{{activerun.distance}} kms in  {{activerun.duration}} </strong> 
                     <div class="card-footer text-right">
-                        <i class="icon ion-chatbubbles positive"></i> 6
-                        <i class="icon ion-heart assertive"></i> 23
                         <div class="pull-left">
                             <i class="icon ion-clock"></i> {{
                              activerun.dateTime
@@ -20,10 +18,5 @@
                 </div>
             </div>
     </div>
-
-
-	
-	<button id="stop-run" class="button button-fab button-fab-bottom-right button-energized-900 icon ion-stop" ui-sref="app.home"></button>
-
   </ion-content>
 </ion-view>

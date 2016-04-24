@@ -18,9 +18,9 @@
     <div style="background: url(https://pixabay.com/static/uploads/photo/2016/02/05/22/39/track-1182233_960_720.jpg) center; background-size: cover;">
 
           <ion-list>
-            <ion-item >&nbsp;</ion-item>
-            <ion-item >&nbsp;</ion-item>
-            <strong style="color:white;padding-left:5px">Aditya Talwalkar</strong>
+            <ion-item class="noborder-item">&nbsp;</ion-item>
+            <ion-item class="noborder-item">&nbsp;</ion-item>
+            <strong style="color:white;padding-left:5px">{{$root.displayName}}</strong>
         </ion-list>
     </div>
         <!--  <ion-list>
@@ -50,37 +50,42 @@
       </ion-list> -->
       <div class="list redtext">
 
-  <a class="item item-icon-left" href="#/app/home">
+  <a class="item item-icon-left noborder-item" href="#/app/home">
     <i class="icon ion-home"></i>
     Home
   </a>
 
-<a class="item item-icon-left" href="#/app/myruns">
+<a class="item item-icon-left noborder-item" href="#/app/myruns">
     <i class="icon ion-arrow-graph-up-right"></i>
     History
   </a>
 
-  <a class="item item-icon-left" href="#/app/home">
+  <a class="item item-icon-left noborder-item" href="#/app/home">
     <i class="icon ion-person-stalker"></i>
     Training Plan
   </a>
 
-  <a class="item item-icon-left" href="#/app/runningform">
+  <a class="item item-icon-left noborder-item" href="#/app/runningform">
     <i class="icon ion-ios-body-outline"></i>
     Running Form
   </a>
 
-  <a class="item item-icon-left" href="#/app/home">
+  <a class="item item-icon-left noborder-item" href="#/app/home">
     <i class="icon ion-arrow-swap"></i>
     Route Detail
   </a>
 
-  <a class="item item-icon-left" href="#/app/home">
+  <a class="item item-icon-left noborder-item" href="#/app/settings">
+    <i class="icon ion-settings"></i>
+    Settings
+  </a>
+
+  <a class="item item-icon-left noborder-item" href="#/app/home">
     <i class="icon ion-ios-people-outline"></i>
     About Us
   </a>
 
-  <a class="item item-icon-left" ng-click="logout()">
+  <a class="item item-icon-left noborder-item" ng-click="logout()">
     <i class="icon ion-log-out"></i>
     Logout
   </a>
