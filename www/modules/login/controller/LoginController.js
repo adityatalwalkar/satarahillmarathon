@@ -4,7 +4,13 @@ angular.module('marathonpacers.login.controllers', [])
   
   var ref = new Firebase(FURL);
   var userkey = "";
-
+  if(Auth.signedIn())
+  {
+    $rootScope.isLoggedin = true;
+    $rootScope.displayName = Auth.getName();
+    $rootScope.LoggedInAs = "user";
+    $state.go("app.home");
+  }
 
   $scope.$on('userloggedinsuccessfully',function(event,data)      {
             console.log("User Logged in Successfully " + data.displayName);

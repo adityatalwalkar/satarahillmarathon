@@ -3,15 +3,15 @@
     
 
 
-    <div class="item card-item" ng-repeat="activerun in activeruns">
-            <div ui-sref="app.rundetail({runId:activerun.id})" class="card  ink ink-dark">
+    <div class="item card-item" ng-repeat="activerun in runs">
+            <div ui-sref="app.rundetail({runId:activerun.$id})" class="card  ink ink-dark">
                 <div class="item item-avatar item-text-wrap top-border">
                     <span class="avatar" style="background-image: url('img/shoes.jpg');border-radius:5%"></span>
-                    <strong>{{activerun.distance}} kms in  {{activerun.duration}} </strong> 
+                    <strong>{{activerun.distance}} kms in {{activerun.duration}} </strong> 
                     <div class="card-footer text-right">
                         <div class="pull-left">
                             <i class="icon ion-clock"></i> {{
-                             activerun.dateTime
+                             getRelativeTime(activerun.datetime)
                             }}
                         </div>
                     </div>

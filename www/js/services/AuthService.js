@@ -52,22 +52,66 @@ angular.module('marathonpacers.services').factory('Auth', function(FURL, $fireba
         return !!ref.getAuth().uid; //using !! means (0, undefined, null, etc) = false | otherwise = true
       else
         return false;
+    },
+
+    getName:function() {
+      var authData = ref.getAuth();
+      switch(authData.provider) {
+         case 'twitter':
+           return authData.twitter.displayName;
+         case 'facebook':
+           return authData.facebook.displayName;
+        case 'google':
+           return authData.google.displayName;
+      }
+  },
+
+    getEmail:function() {
+    var authData = ref.getAuth();
+    switch(authData.provider) {
+       case 'twitter':
+         return authData.twitter.email;
+       case 'facebook':
+         return authData.facebook.email;
+      case 'google':
+         return authData.google.email;
     }
+  },
+
+  getuid:function() {
+    if(ref.getAuth() != null)
+        return ref.getAuth().uid; //using !! means (0, undefined, null, etc) = false | otherwise = true
+      else
+        return "-1";
+  }
+
 	};
 
 	auth.$onAuth(function(authData) {
-    	if (authData ) {
-        // save the user's profile into the database so we can list users,
-        // use them in Security and Firebase Rules, and show profiles
-        ref.child("users").child(authData.uid).set({
-          provider: authData.provider,
-          name: getName(authData)
-        });
+    	if(authData) {
+          angular.copy(authData, Auth.user);
+          Auth.user.profile = $firebaseObject(ref.child('profile').child(authData.uid));
+          Auth.user.profile.$save().then(function(ref) {
+            ref.key() === Auth.user.profile.$id; // true
+          }, function(error) {
+            console.log("Error:", error);
+          });
+          //Auth.user.profile.$add({auth:authData});
+
+      } else {
+      
+      if(Auth.user && Auth.user.profile) {
+        Auth.user.profile.$destroy();
+
       }
+
+      angular.copy({}, Auth.user);
+    } 
 
   });
 
   function getName(authData) {
+    
     switch(authData.provider) {
        case 'twitter':
          return authData.twitter.displayName;
@@ -77,6 +121,7 @@ angular.module('marathonpacers.services').factory('Auth', function(FURL, $fireba
          return authData.google.displayName;
     }
   }
+
 	return Auth;
 
 });

@@ -69,3 +69,10 @@
 	border-top-style: solid !important;
 	border-top-width:1px !important;
 } 
+.blackcolor
+{
+	color:#666 !important;
+}
+.nv-x text {
+    display: none;
+}

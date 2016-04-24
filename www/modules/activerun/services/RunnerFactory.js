@@ -17,6 +17,7 @@ angular.module('marathonpacers.activerun.services')
             this.duration = moment.duration(startTime);
             this.lapDuration = moment.duration(startTime);
             this.savedTime = new Date().getTime();
+            this.startTime = new Date().getTime();
             this.currentPace = 0;
             this.currentLap = 0;
             this.distanceCovered = 0; 
@@ -73,12 +74,19 @@ angular.module('marathonpacers.activerun.services')
 
           this.saveLap = function() {
             var lap = new Object();
+            lap.name =  (this.laps.length + 1);
             lap.coords = this.currentPosition.coords;
             lap.durationSeconds = this.duration.asSeconds();
-            lap.lapDuration = this.lapDuration.asSeconds();
-            lap.lapDistance = this.lapDistance;
+            lap.lapDurationSeconds = this.lapDuration.asSeconds();
+            lap.duration = getDurationString(this.duration);
+            lap.lapDuration = getDurationString(this.lapDuration);
+            lap.lapDistance = convertDecimal(this.lapDistance,2);
+            lap.totalDistance = convertDecimal(this.distanceCovered,2);
             lap.lapSpeed = this.lapSpeed;
+            lap.lapPace = speedToPace(this.lapSpeed);
             this.laps.push(lap);
+            this.lapDuration = moment.duration(0);
+            this.lapDistance = 0;
           }
 
           this.calculateDistanceCovered = function()
@@ -126,6 +134,18 @@ angular.module('marathonpacers.activerun.services')
 
           this.distanceCoveredDisplay = function() {
             return convertDecimal(this.distanceCovered,2);
+          }
+
+          this.getRun = function() {
+              return {
+                duration:getDurationString(this.duration),
+                distance:convertDecimal(this.distanceCovered,2),
+                datetime: this.startTime,
+                averageSpeed:convertDecimal(this.averageSpeed,2),
+                averagePace:convertDecimal(this.averagePace,2),
+                laps:this.laps
+              }
+
           }
       }
 

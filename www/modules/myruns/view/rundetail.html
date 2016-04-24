@@ -1,8 +1,25 @@
 <ion-view view-title="Run Detail"  class="animate-fade-slide-in">
   <ion-content >
-    
+   
+    <div class="list responsive-sm animate-fade-slide-in" style="padding-top:30px">
 
 
+                        <div class="item verylargetext centeralign tall noborder-item blackcolor">{{runDetails.distance}}</div>
+                        <div class="item largetext centeralign noborder-item blackcolor">km</div>
+                        <div class="item row largetext  centeralign noborder-item blackcolor">
+                                <div class="col">
+                                    <i class="icon ion-android-stopwatch"></i> {{runDetails.duration}}
+                                </div>
+                                <div class="col">
+                                    <i class="icon ion-speedometer"></i> {{displayPace(runDetails.averagePace)}}
+                                </div>
+                        </div>
+                        <div class="item">
+                           <nvd3 options="options" data="getLapDataForChart()"></nvd3>
+                        </div>
+    </div>
+
+<!--
     <div class="item card-item" ng-repeat="activerun in activeruns">
             <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
                 <div class="item item-avatar item-text-wrap">
@@ -18,6 +35,6 @@
                 </div>
             </div>
     </div>
-
+-->
   </ion-content>
 </ion-view>

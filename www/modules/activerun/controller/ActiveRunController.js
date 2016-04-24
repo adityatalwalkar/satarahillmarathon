@@ -1,6 +1,6 @@
 angular.module('marathonpacers.activerun.controllers', [])
 
-.controller('ActiveRunController', function($scope,speechService,geoLocationService,runnerFactory,pacerFactory,ionicMaterialInk, ionicMaterialMotion, $ionicSideMenuDelegate, $timeout, $interval,$state,$ionicSlideBoxDelegate) {
+.controller('ActiveRunController', function($scope,speechService,geoLocationService,runnerFactory,pacerFactory,ionicMaterialInk, ionicMaterialMotion, $ionicSideMenuDelegate, $timeout, $interval,$state,$ionicSlideBoxDelegate,$firebaseArray, $firebaseObject,FURL,Auth) {
   speechService.announceMessage("Run Started");
 
 
@@ -9,7 +9,11 @@ angular.module('marathonpacers.activerun.controllers', [])
         this.session.runner.stopRun();
         for(var i=0;i<this.session.pacers.length;i++)
           this.session.pacers[i].stopRun();  
+
+        var itemsRef = new Firebase(FURL + "runs/" + Auth.getuid() );
+        var runs = $firebaseArray(itemsRef);
         
+        runs.$add(this.session.runner.getRun());        
         $state.go("app.home");
     };
 
