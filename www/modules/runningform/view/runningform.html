@@ -1,72 +1,31 @@
 <ion-view view-title="Running Form">
-    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
-            <div class="list half">
-                <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
-                    <div class="ink dark-bg">
-                        <h2>Lean Forward</h2>
-                        <img class="full-image" src="https://pixabay.com/static/uploads/photo/2014/11/16/23/39/superhero-534120_960_720.jpg">
+    <ion-content ng-class="{expanded:isExpanded}" >
+            
+            <div ng-repeat="article in articles">
+                <div ng-switch on="article.type">
+                    <div ng-switch-when="video">
+                        <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
+                            <div class="bar bar-energized-900">
+                                <h1 class="title whitetext">{{article.title}}</h1>
+                            </div>
+                                <div class="video-container">
+                                    <iframe ng-src="{{getUrl(article.url)}}" frameborder="0" width="100%"></iframe>
+                                </div>
+                        </div>
+   
                     </div>
-                    <div class="item tabs tabs-secondary tabs-icon-left">
-                        <a class="tab-item stable-bg assertive">
-                            <i class="icon ion-heart"></i>
-                            4
-                        </a>
-                        <a class="tab-item stable-bg positive-900">
-                            <i class="icon ion-chatbubbles"></i>
-                            2
-                        </a>
+                    <div ng-switch-default>
+                        <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
+                            <div class="bar bar-energized-900">
+                                <h1 class="title whitetext">{{article.title}}</h1>
+                            </div>
+
+                                    <img class="full-image" src="{{article.image_url}}">
+                             
+                        </div>
                     </div>
-                </div>
-                <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
-                    <div class="ink dark-bg">
-                        <h2>Mind your neck </h2>
-                        <img class="full-image" src="https://pixabay.com/static/uploads/photo/2016/02/19/21/51/neck-1211231_960_720.jpg">
-                    </div>
-                    <div class="item tabs tabs-secondary tabs-icon-left">
-                        <a class="tab-item stable-bg assertive">
-                            <i class="icon ion-heart"></i>
-                            6
-                        </a>
-                        <a class="tab-item stable-bg positive-900">
-                            <i class="icon ion-chatbubbles"></i>
-                            1
-                        </a>
-                    </div>
-                </div>
+                </div>             
+
             </div>
-            <div class="list half">
-            <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
-                <div class="ink dark-bg">
-                    <h2>Making Olaf a House</h2>
-                    <img class="full-image" src="https://pixabay.com/static/uploads/photo/2014/12/20/09/18/running-573762_960_720.jpg">
-                </div>
-                <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item stable-bg assertive">
-                        <i class="icon ion-heart"></i>
-                        22
-                    </a>
-                    <a class="tab-item stable-bg positive-900">
-                        <i class="icon ion-chatbubbles"></i>
-                        9
-                    </a>
-                </div>
-            </div>
-            <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
-                <div class="ink dark-bg">
-                    <h2>ohai!</h2>
-                    <img class="full-image" src="https://pixabay.com/static/uploads/photo/2015/02/13/22/10/runners-635906_960_720.jpg">
-                </div>
-                <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item stable-bg assertive">
-                        <i class="icon ion-heart"></i>
-                        8
-                    </a>
-                    <a class="tab-item stable-bg positive-900">
-                        <i class="icon ion-chatbubbles"></i>
-                        0
-                    </a>
-                </div>
-            </div>
-        </div>
     </ion-content>
 </ion-view>

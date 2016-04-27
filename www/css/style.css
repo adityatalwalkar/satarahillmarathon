@@ -36,7 +36,6 @@
 
 .whitetext
 {
-
 	color:white !important;
 }
 
@@ -81,4 +80,8 @@
 }
 .nv-x text {
     display: none;
+}
+.padded
+{
+	padding:10px;
 }

@@ -1,11 +1,24 @@
 angular.module('marathonpacers.home.controllers', [])
 
-.controller('HomeController', function($scope,$firebaseObject,FURL,Auth) {
+.controller('HomeController', function($scope,$firebaseObject,$ionicLoading,FURL,Auth) {
 
   
   var itemsRef = new Firebase(FURL + "tipOfDay");
+
+  itemsRef.once('value',function(snapshot) {
+                $ionicLoading.hide();
+            }
+        );
+  
   $scope.tipOfDay= $firebaseObject(itemsRef);
-   
+
+  $ionicLoading.show({
+          template: 'Loading Data .. please wait',
+          animation: 'fade-in',
+          showBackdrop: true,
+          maxWidth: 200,
+          showDelay: 0
+        });   
 
 	var options = {
       location: 'yes',
