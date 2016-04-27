@@ -1,11 +1,11 @@
 <ion-view view-title="Home" hide-back-button="true">
   <ion-content>
   		
-  		<div class="list card" ng-click="tipOfDay('http://irunlikeme.blogspot.in/2011/02/how-to-engage-your-core-while-running.html');">
+  		<div class="list card" ng-click="openUrl(tipOfDay.url);">
   		  <div class="item item-avatar noborder-item top-border" >
-  		    <button id="begin-run" class="button button-fab button-assertive icon ion-ios-lightbulb-outline" style="position:absolute;top:12px;left:12px"></button>
-		    <p><strong>Engage the core</strong></p>
-		    <p> The easiest way to do this is through visualization. While running you want an upright posture that comes from your hips all the way through to the top of your head. You don't want to 'stretch' through the top of your head, you just want to feel tall. You should lean forward ever so slightly and tuck your hips beneath your lower back. This may sound hard to do, and it is, I didn't find it easy to do until I started doing yoga.</p>
+  		    <button id="begin-run" class="button button-fab button-energized-900 icon ion-ios-lightbulb-outline" style="position:absolute;top:12px;left:12px"></button>
+		    <p><strong>{{tipOfDay.title}}</strong></p>
+		    <p> {{tipOfDay.description}}</p>
 		  </div>
 		</div>
 
@@ -20,11 +20,9 @@
 		    <p>
 		      Long Slow Run of 11 kms at a pace of 6 mins/km
 		    </p>
+		    <button  class="button button-full button-energized-900 ink ion-android-arrow-dropright-circle icon-left" ui-sref="app.activerun">Begin Run</button>
+	
 		  </div>
-
-		  <div class="item noborder-item">
-	  		<button  class="button button-full button-energized-900 ink ion-android-arrow-dropright-circle icon-left" ui-sref="app.activerun">Begin Run</button>
-	  		</div>	
 		</div>
 		</div>
 		

@@ -1,15 +1,19 @@
 angular.module('marathonpacers.home.controllers', [])
 
-.controller('HomeController', function($scope,speechService) {
+.controller('HomeController', function($scope,$firebaseObject,FURL,Auth) {
 
   
+  var itemsRef = new Firebase(FURL + "tipOfDay");
+  $scope.tipOfDay= $firebaseObject(itemsRef);
+   
+
 	var options = {
       location: 'yes',
       clearcache: 'yes',
       toolbar: 'no'
    };
 
-  $scope.tipOfDay = function(url) {
+  $scope.openUrl = function(url) {
 	  cordova.InAppBrowser.open(url,  options)
 		
       .then(function(event) {

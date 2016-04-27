@@ -1,6 +1,6 @@
 1. Display Training Plan - fetch from database
-2. Tip of Day - fetch from database
-3. Todays run - fetch from database (based on the training plan)
+2. Tip of Day - fetch from database - DONE
+3. Todays run - fetch from database (based on the training plan) 
 4. Running Form - fetch from database 
 5. Add total miles on Running History
 6. Create Leader board - 
