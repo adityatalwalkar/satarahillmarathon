@@ -79,7 +79,7 @@ angular.module('marathonpacers.activerun.services')
 
                 pacer.distanceCovered = pacerDistance;
                 $rootScope.$broadcast("pacerdistanceupdated",{pacerName:pacer.pacerName,distanceCovered:pacer.distanceCovered,pacer:pacer});
-                if(lastPacerLap != pacer.currentLap)
+                if(lastPacerLap != pacer.currentLap && pacer.currentLap > 0)
                     $rootScope.$broadcast("pacerspeedchanged",{pacerName:pacer.pacerName,pace:pacer.paceChart[pacer.currentLap].pace});
 
             }

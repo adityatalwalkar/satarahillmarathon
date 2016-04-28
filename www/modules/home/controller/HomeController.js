@@ -1,6 +1,8 @@
 angular.module('marathonpacers.home.controllers', [])
 
-.controller('HomeController', function($scope,$firebaseObject,$ionicLoading,FURL,Auth) {
+.controller('HomeController', function($scope,$firebaseObject,$ionicLoading,FURL,Auth,$rootScope) {
+
+
 
   
   var itemsRef = new Firebase(FURL + "tipOfDay");
@@ -9,8 +11,10 @@ angular.module('marathonpacers.home.controllers', [])
                 $ionicLoading.hide();
             }
         );
-  
+
   $scope.tipOfDay= $firebaseObject(itemsRef);
+
+  $rootScope.settings = JSON.parse(window.localStorage['settings'] || '{"announcementFrequency": 5,"unit": "Kilometers","announceDistance":true,"announcelapPace":true}');
 
   $ionicLoading.show({
           template: 'Loading Data .. please wait',
@@ -38,13 +42,5 @@ angular.module('marathonpacers.home.controllers', [])
       });
   };
 
-  $scope.activeruns = [
-    { title: 'Home 1', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
 })
 

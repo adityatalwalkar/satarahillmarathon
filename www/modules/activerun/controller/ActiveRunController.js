@@ -1,7 +1,7 @@
 angular.module('marathonpacers.activerun.controllers', [])
 
-.controller('ActiveRunController', function($scope,speechService,geoLocationService,runnerFactory,pacerFactory,ionicMaterialInk, ionicMaterialMotion, $ionicSideMenuDelegate, $timeout, $interval,$state,$ionicSlideBoxDelegate,$firebaseArray, $firebaseObject,FURL,Auth) {
-  speechService.announceMessage("Run Started");
+.controller('ActiveRunController', function($scope,speechService,geoLocationService,scheduledAnnouncementService,runnerFactory,pacerFactory,ionicMaterialInk, ionicMaterialMotion, $ionicSideMenuDelegate, $timeout, $interval,$state,$ionicSlideBoxDelegate,$firebaseArray, $firebaseObject,FURL,Auth) {
+  
 
 
     $scope.stopRun = function () {
@@ -9,6 +9,7 @@ angular.module('marathonpacers.activerun.controllers', [])
         this.session.runner.stopRun();
         for(var i=0;i<this.session.pacers.length;i++)
           this.session.pacers[i].stopRun();  
+        scheduledAnnouncementService.stop();
 
         var itemsRef = new Firebase(FURL + "runs/" + Auth.getuid() );
         var runs = $firebaseArray(itemsRef);
@@ -66,9 +67,8 @@ angular.module('marathonpacers.activerun.controllers', [])
 
 
     $scope.$on('pacerspeedchanged',function(event,data)      {
-            console.log("ActiveRunController: Pacer " + data.pacerName +" changed speed to " + data.pace)
-            //speechService.announceMessage(data.pa + " kilometers completed in " + toTimeString(data.duration,2) );
-            //speechService.announceMessage(convertDecimal(data.distance,2) + " kilometers completed in " + toTimeString(data.duration,2) );
+            console.log("ActiveRunController: Pacer " + data.pacerName +" changed speed to " + data.pace);
+            speechService.announceMessage( data.pacerName +" pacer has changed the pace  to " + data.pace + " mins per kilometer");
     });
 
     $scope.$on('pacerdistanceupdated',function(event,data)      {
@@ -143,8 +143,45 @@ angular.module('marathonpacers.activerun.controllers', [])
     });    
 
     $scope.$on('runstarted',function(event,data)      {
-      $scope.session.pacers = pacerFactory.createAllPacers();   
+
+      $scope.session.pacers = pacerFactory.createAllPacers(); 
+      scheduledAnnouncementService.start(getAnnouncement)  
+      speechService.announceMessage("Run Started");
     });
+
+    function getAnnouncement()
+    {
+    var message = "";
+        if($scope.session.runner.pacerAhead != null)
+          message += getPacerAnnouncement($scope.session.runner.pacerAhead);
+        if($scope.session.runner.pacerBehind != null)
+          message += getPacerAnnouncement($scope.session.runner.pacerBehind);
+
+        return message;
+    }
+
+    function getPacerAnnouncement(pacer) {
+        var difference = pacer.distanceCovered - $scope.session.runner.distanceCovered;
+        var absdifference = Math.floor(Math.abs(difference) * 1000);
+        var distanceMessage ="";
+
+        if(absdifference < 1000)
+        {
+          distanceMessage = absdifference + " meters"; 
+        }
+        else
+        {
+          var kms = Math.floor(absdifference/1000);
+          var meters = Math.floor((absdifference - (kms * 1000)));
+          distanceMessage = kms + " kilo meters and " + meters + " meters";
+        }
+        if(difference > 0)
+          return pacer.pacerName + " pacer is ahead of you by " + distanceMessage;  
+        else
+          return pacer.pacerName + " pacer is behind you by " + distanceMessage;
+    }
+
+
 
     function onChange(newPosition) {
         //$scope.session.runner.startRun();

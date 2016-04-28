@@ -9,6 +9,7 @@ angular.module('marathonpacers.activerun.services')
           this.isRunning = false;
           this.pacerAhead = null;
           this.pacerBehind = null;
+          
           this.startRun = function(startTime)
           {
 
@@ -23,6 +24,10 @@ angular.module('marathonpacers.activerun.services')
             this.distanceCovered = 0; 
             this.lapDistance = 0;
             this.isRunning = true;
+            this.averageSpeed = 0;
+            this.averagePace = 0;
+            this.lapSpeed = 0;
+            this.lapPace = 0;
             this.runTimer = $interval(this.tick, 500);
 
             $rootScope.$broadcast("runstarted",null);
@@ -83,7 +88,9 @@ angular.module('marathonpacers.activerun.services')
             lap.lapDistance = convertDecimal(this.lapDistance,2);
             lap.totalDistance = convertDecimal(this.distanceCovered,2);
             lap.lapSpeed = this.lapSpeed;
-            lap.lapPace = speedToPace(this.lapSpeed);
+            lap.lapPace = 0;
+            if(this.lapSpeed > 0 ) 
+                this.lapPace = speedToPace(this.lapSpeed);
             this.laps.push(lap);
             this.lapDuration = moment.duration(0);
             this.lapDistance = 0;
