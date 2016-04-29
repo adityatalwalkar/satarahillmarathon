@@ -24,18 +24,23 @@ angular.module('marathonpacers.runningform.controllers', [])
             }
         );
 
-
+    $scope.goto = function(url)
+    {
+      url = getUrl(url);
+      cordova.InAppBrowser.open(url,  options)
+    
+      .then(function(event) {
+         // success
+      })
+    
+      .catch(function(event) {
+         // error
+      }); 
+    }
     $scope.getUrl = function(url)
     {
         return $sce.trustAsResourceUrl(url);
     }
-  $scope.activeruns = [
-    { title: 'Run 1', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+  
 })
 

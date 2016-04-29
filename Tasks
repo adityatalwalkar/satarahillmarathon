@@ -7,8 +7,8 @@
 6. Create Leader board - 
 	a. Show the leaderboard
 	b. Update the leaderboard
-7. Pacer Announcement - According to Settings
-8. Save Settings to local storage
+7. Pacer Announcement - According to Settings - DONE
+8. Save Settings to local storage - DONE
 9. Add Route Detail
 10. Add Warmup/Stretching
 11. ios deployment
@@ -18,5 +18,23 @@
 15. Run Pause/Resume
 16. Run Race button - No Internet Connection
 17. FAQ
+18. Insomnia
+19. Stop/Abandon run
+20. Loading data timeouts
 
 
+
+
+Building instructions
+1. npm run sass
+2. ionic serve --labs
+
+
+cordova build --release android
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../../../../../my-release-key.keystore android-release-unsigned.apk alias_name
+
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore /home/samadhi/workspace/satarahillmarathon/my-release-key.keystore android-release-unsigned.apk alias_name
+
+/opt/android-sdk/build-tools/23.0.2/zipalign -v 4 android-release-unsigned.apk SataraHillHalfMarathon.apk
