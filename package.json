@@ -26,7 +26,11 @@
       "id": "org.apache.cordova.speech.speechsynthesis"
     },
     "ionic-plugin-deploy",
-    "cordova-plugin-splashscreen"
+    "cordova-plugin-splashscreen",
+    {
+      "locator": "https://github.com/EddyVerbruggen/Insomnia-PhoneGap-Plugin.git",
+      "id": "cordova-plugin-insomnia"
+    }
   ],
   "cordovaPlatforms": [
     "android",
