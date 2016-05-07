@@ -1,0 +1,23 @@
+<ion-view view-title="Events"  >
+  <ion-content >
+    
+
+
+    <div class="item card-item" ng-repeat="trainingplan in plans">
+            <div ui-sref="app.events.detail({eventId:trainingplan.id})" class="card  ink ink-dark">
+                <div class="item item-avatar item-text-wrap top-border">
+                    <span class="avatar" style="background-image: url({{trainingplan.logo}});border-radius:5%"></span>
+                    <h3>{{trainingplan.name}}</h3> 
+                    <p>{{trainingplan.description}}</p>
+                    <div class="card-footer text-right">
+                        <div class="pull-left">
+                            <i class="icon ion-ios-pricetag-outline"></i> {{
+                             (trainingplan.price == 0) ? "Free": trainingplan.price;
+                            }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+  </ion-content>
+</ion-view>

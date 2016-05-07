@@ -66,8 +66,9 @@ angular.module('marathonpacers.activerun.services')
                 if(tempLap != this.currentLap)
                 {
                     this.currentLap = tempLap;
+                    var lapTime = this.lapDuration.asSeconds();
                     this.saveLap();
-                    $rootScope.$broadcast("lapchanged",{distance:this.distanceCovered,duration:this.lapDuration.asSeconds()});
+                    $rootScope.$broadcast("lapchanged",{distance:this.distanceCovered,duration:lapTime});
                 }
             }
             else

@@ -4,7 +4,7 @@
 
 
     <div class="item card-item" ng-repeat="activerun in runs">
-            <div ui-sref="app.rundetail({runId:activerun.$id})" class="card  ink ink-dark">
+            <div ui-sref="app.myruns.detail({runId:activerun.$id})" class="card  ink ink-dark">
                 <div class="item item-avatar item-text-wrap top-border">
                     <span class="avatar" style="background-image: url('img/shoes.jpg');border-radius:5%"></span>
                     <strong>{{activerun.distance}} kms in {{activerun.duration}} </strong> 

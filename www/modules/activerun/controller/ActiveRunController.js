@@ -61,14 +61,18 @@ angular.module('marathonpacers.activerun.controllers', [])
 
     $scope.$on('lapchanged',function(event,data)      {
             console.log("ActiveRunController: Lap Changed " + data)
-            if(!data.distance)
+            if(data.distance != null)
             speechService.announceMessage(convertDecimal(data.distance,2) + " kilometers completed in " + toTimeString(data.duration,2) );
     });
 
 
     $scope.$on('pacerspeedchanged',function(event,data)      {
             console.log("ActiveRunController: Pacer " + data.pacerName +" changed speed to " + data.pace);
-            speechService.announceMessage( data.pacerName +" pacer has changed the pace  to " + data.pace + " mins per kilometer");
+            if( 
+                $scope.session.runner.pacerAhead != null && $scope.session.runner.pacerAhead.pacerName === data.pacerName ||
+                $scope.session.runner.pacerBehind != null && $scope.session.runner.pacerBehind.pacerName === data.pacerName 
+              )
+              speechService.announceMessage( data.pacerName +" pacer has changed the pace  to " + data.pace + " mins per kilometer");
     });
 
     $scope.$on('pacerdistanceupdated',function(event,data)      {
