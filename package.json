@@ -30,19 +30,14 @@
     {
       "locator": "https://github.com/EddyVerbruggen/Insomnia-PhoneGap-Plugin.git",
       "id": "cordova-plugin-insomnia"
+    },
+    {
+      "locator": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git",
+      "id": "cordova-plugin-geolocation"
     }
   ],
   "cordovaPlatforms": [
     "android",
-    {
-      "platform": "android",
-      "version": "",
-      "locator": "android"
-    },
-    {
-      "platform": "ios",
-      "version": "3.9.2",
-      "locator": "ios@3.9.2"
-    }
+    "ios"
   ]
 }

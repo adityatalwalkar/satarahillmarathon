@@ -11,6 +11,11 @@ angular.module('marathonpacers.activerun.controllers', [])
           this.session.pacers[i].stopRun();  
         scheduledAnnouncementService.stop();
 
+        window.plugins.insomnia.allowSleepAgain();
+        if(cordova.plugins.backgroundMode)
+          cordova.plugins.backgroundMode.disable();
+
+
         var itemsRef = new Firebase(FURL + "runs/" + Auth.getuid() );
         var runs = $firebaseArray(itemsRef);
         
@@ -149,7 +154,12 @@ angular.module('marathonpacers.activerun.controllers', [])
     $scope.$on('runstarted',function(event,data)      {
 
       $scope.session.pacers = pacerFactory.createAllPacers(); 
-      scheduledAnnouncementService.start(getAnnouncement)  
+      scheduledAnnouncementService.start(getAnnouncement);
+      if(cordova.plugins.backgroundMode) {  
+        cordova.plugins.backgroundMode.setDefaults({ title:"PNB Metlife Satara Hill Half Marathon",text:"Run in progress"});
+        cordova.plugins.backgroundMode.enable();
+      }
+      window.plugins.insomnia.keepAwake();
       speechService.announceMessage("Run Started");
     });
 

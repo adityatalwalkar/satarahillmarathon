@@ -47,6 +47,9 @@ angular.module('marathonpacers.activerun.services')
 
           this.runTo = function(newPosition)
           {
+            if (!$scope.session.runStarted) {  return; }
+            if(newPosition.coords.accuracy > 20) {  return; }
+            if(newPosition.timestamp < this.oldTimeStamp)  { return; }
 
             if (!this.prevPosition) {
                    this.prevPosition  = {coords:{latitude:newPosition.coords.latitude,longitude:newPosition.coords.longitude}};
@@ -55,7 +58,7 @@ angular.module('marathonpacers.activerun.services')
                 this.prevPosition = this.currentPosition;
             this.currentPosition = newPosition;
             this.currentSpeed = newPosition.speed * 3.6;
-
+            this.oldTimeStamp = newPosition.timestamp; 
             if(this.isRunning)
             {
                 this.calculateDistanceCovered();

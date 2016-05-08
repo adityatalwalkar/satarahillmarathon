@@ -36,6 +36,8 @@ cordova build --release android
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../../../../../my-release-key.keystore android-release-unsigned.apk alias_name
 
 
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore /home/samadhi/workspace/satarahillmarathon/my-release-key.keystore android-release-unsigned.apk alias_name
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore /home/samadhi/workspace/satarahillmarathon/my-release-key.keystore /home/samadhi/workspace/sample/sidemenu/platforms/android/build/outputs/apk/android-release-unsigned.apk alias_name
 
-/opt/android-sdk/build-tools/23.0.2/zipalign -v 4 android-release-unsigned.apk SataraHillHalfMarathon.apk
+rm /home/samadhi/workspace/sample/sidemenu/platforms/android/build/outputs/apk/SataraHillHalfMarathon.apk
+
+/opt/android-sdk/build-tools/23.0.2/zipalign -v 4 /home/samadhi/workspace/sample/sidemenu/platforms/android/build/outputs/apk/android-release-unsigned.apk /home/samadhi/workspace/sample/sidemenu/platforms/android/build/outputs/apk/SataraHillHalfMarathon.apk
