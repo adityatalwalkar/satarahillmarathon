@@ -19,6 +19,15 @@ angular.module('marathonpacers', ['ionic','ionic-material','marathonpacers.servi
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    
+
+    /*var push = new Ionic.Push({});
+
+    push.register(function(token) {
+      // Log out your device token (Save this!)
+      console.log("Got Token:",token.token);
+    });*/
   });
 })
 
@@ -152,8 +161,18 @@ var authenticated = ['$q', 'Auth', '$state','$timeout',function ($q, Auth,$state
           templateUrl: 'modules/login/view/login.html',
           controller: 'LoginController'
         })
-      ;
+      
 
+.state('app.underconstruction', {
+    url: '/underconstruction',
+    views: {
+      'menuContent': {
+        templateUrl: 'modules/underconstruction/view.html'
+        
+      }
+    }
+  })
+      ;
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');

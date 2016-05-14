@@ -9,6 +9,7 @@ angular.module('marathonpacers.activerun.services')
           this.isRunning = false;
           this.pacerAhead = null;
           this.pacerBehind = null;
+          this.gpsAccuracy = 0;
           
           this.startRun = function(startTime)
           {
@@ -47,8 +48,9 @@ angular.module('marathonpacers.activerun.services')
 
           this.runTo = function(newPosition)
           {
-            if (!$scope.session.runStarted) {  return; }
-            if(newPosition.coords.accuracy > 20) {  return; }
+            console.log(newPosition);
+           // if(newPosition.coords.accuracy > 20) {  return; }
+            this.gpsAccuracy = newPosition.coords.accuracy;
             if(newPosition.timestamp < this.oldTimeStamp)  { return; }
 
             if (!this.prevPosition) {
@@ -57,7 +59,7 @@ angular.module('marathonpacers.activerun.services')
             else
                 this.prevPosition = this.currentPosition;
             this.currentPosition = newPosition;
-            this.currentSpeed = newPosition.speed * 3.6;
+            this.currentSpeed = newPosition.coords.speed * 3.6;
             this.oldTimeStamp = newPosition.timestamp; 
             if(this.isRunning)
             {
