@@ -34,10 +34,16 @@
     {
       "locator": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git",
       "id": "cordova-plugin-geolocation"
-    }
+    },
+    "cordova.plugins.diagnostic",
+    {
+      "locator": "https://github.com/EddyVerbruggen/cordova-plugin-backgroundaudio",
+      "id": "nl.x-services.plugins.backgroundaudio"
+    },
+    "cordova-background-geolocation-lt"
   ],
   "cordovaPlatforms": [
-    "ios",
-    "android"
+    "android",
+    "ios"
   ]
 }

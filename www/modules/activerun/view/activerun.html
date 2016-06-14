@@ -26,22 +26,27 @@ https://pixabay.com/static/uploads/photo/2012/02/29/15/52/track-19217_960_720.jp
                         <div class="item centeralign noborder-item" style="padding-bottom:30px">
                             <img class="full-image rounded" src="img/newlogo.png"/>
                         </div>
+                        <div class="item verysmalltext centeralign tall noborder-item">Distance</div>
 
                         <div class="item verylargetext centeralign tall noborder-item">{{session.runner.distanceCoveredDisplay()}}</div>
                         <div class="item largetext centeralign noborder-item">km</div>
-                        <div class="item row largetext  centeralign noborder-item">
-                                <div class="col">
+
+                         
+
+                        <div class="item row largetext centeralign noborder-item"  >
+                                <div class="col"><div class="verysmalltext"   >Duration </div>
                                     <i class="icon ion-android-stopwatch"></i> {{session.runner.runningDurationDisplay()}}
                                 </div>
-                                <div class="col">
+                                <div class="col"><div class="verysmalltext">Current Pace </div>
                                     <i class="icon ion-speedometer"></i> {{session.runner.currentPaceDisplay()}}
                                 </div>
+
                                 <!--<div class="col">
                                     <i class="icon ion-location"></i> {{session.runner.gpsAccuracy}}
                                 </div>-->
                         </div>
                         <div class="item centeralign noborder-item">  
-                            <button id="stop-run" class="button button-fab  button-energized-900 icon ion-stop button-raised" style="width:100px;height:100px" ng-click="stopRun()"></button>
+                            <button id="stop-run" class="button button-fab  button-energized-900 icon ion-stop button-raised" style="width:100px;height:100px" ng-click="stopRun(true)"></button>
                             <!--<button id="stop-run" class="button button-fab  button-calm-900 icon ion-pause button-raised" style="width:100px;height:100px" ng-click="testRun()"></button>-->
                         </div>
             </div>

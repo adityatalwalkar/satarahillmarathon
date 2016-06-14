@@ -49,7 +49,7 @@ angular.module('marathonpacers.activerun.services')
           this.runTo = function(newPosition)
           {
             console.log(newPosition);
-           // if(newPosition.coords.accuracy > 20) {  return; }
+            //if(newPosition.coords.accuracy > 20) {  return; }
             this.gpsAccuracy = newPosition.coords.accuracy;
             if(newPosition.timestamp < this.oldTimeStamp)  { return; }
 

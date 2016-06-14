@@ -39,6 +39,12 @@
 	color:white !important;
 }
 
+.verysmalltext
+{
+	font-size:20px !important;
+	color:white !important;
+	font-weight: 900;
+}
 
 .runningScreen {
 	background: #83a4d4; /* fallback for old browsers */

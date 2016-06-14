@@ -1,16 +1,15 @@
 angular.module('marathonpacers.activerun.controllers', [])
 
-.controller('ActiveRunController', function($scope,speechService,geoLocationService,scheduledAnnouncementService,runnerFactory,pacerFactory,ionicMaterialInk, ionicMaterialMotion, $ionicSideMenuDelegate, $timeout, $interval,$state,$ionicSlideBoxDelegate,$firebaseArray, $firebaseObject,FURL,Auth,$ionicLoading) {
+.controller('ActiveRunController', function($scope,speechService,backgroundGeoLocationService,scheduledAnnouncementService,runnerFactory,pacerFactory,ionicMaterialInk, ionicMaterialMotion, $ionicSideMenuDelegate, $timeout, $interval,$state,$ionicSlideBoxDelegate,$firebaseArray, $firebaseObject,FURL,Auth,$ionicLoading,$ionicPopup) {
   
 
 
-    $scope.stopRun = function () {
+    $scope.stopRun = function (endRun) {
         console.log("stopping run");
-        this.session.runner.stopRun();
-        for(var i=0;i<this.session.pacers.length;i++)
-          this.session.pacers[i].stopRun();  
+
         scheduledAnnouncementService.stop();
-        geoLocationService.stop();
+        //geoLocationService.stop();
+        backgroundGeoLocationService.stop();
         if(window && window.plugins)
         window.plugins.insomnia.allowSleepAgain();
 
@@ -18,11 +17,20 @@ angular.module('marathonpacers.activerun.controllers', [])
           cordova.plugins.backgroundMode.disable();
 
 
-        var itemsRef = new Firebase(FURL + "runs/" + Auth.getuid() );
-        var runs = $firebaseArray(itemsRef);
         
-        runs.$add(this.session.runner.getRun());        
-        $state.go("app.home");
+        if(endRun)
+        {
+                this.session.runner.stopRun();
+                for(var i=0;i<this.session.pacers.length;i++)
+                  this.session.pacers[i].stopRun();  
+
+                speechService.announceMessage("Run Stopped");
+                var itemsRef = new Firebase(FURL + "runs/" + Auth.getuid() );
+                var runs = $firebaseArray(itemsRef);
+                
+                runs.$add(this.session.runner.getRun());        
+                $state.go("app.home");
+        }
     };
 
     $scope.testRun = function() {
@@ -30,10 +38,42 @@ angular.module('marathonpacers.activerun.controllers', [])
       //this.nextSlide();
     }
 
-    
+    $scope.abandonRun = function() { 
+
+      if(!$scope.session.gpsFound)
+      {
+
+
+        if(typeof cordova != "undefined" && cordova.plugins.diagnostic) 
+        cordova.plugins.diagnostic.isLocationEnabled(function(enabled) {
+        if(!enabled) {
+
+             var alertPopup = $ionicPopup.alert({
+             title: 'GPS is not enabled',
+             template: 'Please Enable GPS in Location Settings'
+           });
+                    
+          alertPopup.then(function(res) {
+                  cordova.plugins.diagnostic.switchToLocationSettings();
+           });
+                    
+        }
+        else
+                  var newalertPopup = $ionicPopup.alert({
+                   title: 'GPS Error ',
+                   template: 'Cannot connect to GPS.'
+                 });
+        }, 
+
+        function(error){
+                alert("The following error occurred: "+error);
+            });
+        $scope.stopRun(false);
+      }
+    }   
 
     /*Initialize Session */
-    $scope.session = {runposition:0,runner:null,pacers:[],pacerupdates:[]};
+    $scope.session = {runposition:0,runner:null,pacers:[],pacerupdates:[],gpsFound:false};
 
 
     $scope.options = {
@@ -61,11 +101,18 @@ angular.module('marathonpacers.activerun.controllers', [])
           showDelay: 0
         });
 
+    $timeout(function () {
+            $ionicLoading.hide();
+            $scope.abandonRun();
+        }, 30000);
+
     $scope.session.runner = runnerFactory.createRunner();
     $scope.session.pacers = pacerFactory.createAllPacers();
 
 
-    geoLocationService.start(onChange, gpsError);
+    //geoLocationService.start(onChange, gpsError);
+    backgroundGeoLocationService.initialize();
+    backgroundGeoLocationService.start();
 
     $scope.$on('lapchanged',function(event,data)      {
             console.log("ActiveRunController: Lap Changed " + data)
@@ -152,19 +199,29 @@ angular.module('marathonpacers.activerun.controllers', [])
               console.log("Update received for " + data.pacerName);
             }
             
-    });    
+    });
+
+    $scope.$on("positionchanged",function(event,data) {
+        onChange(data);
+    });
+    
 
     $scope.$on('runstarted',function(event,data)      {
       console.log("Run Started");
+      $scope.session.gpsFound = true;
       $scope.session.pacers = pacerFactory.createAllPacers(); 
       scheduledAnnouncementService.start(getAnnouncement);
       if(typeof cordova != "undefined" && cordova.plugins.backgroundMode) {  
         cordova.plugins.backgroundMode.setDefaults({ title:"PNB Metlife Satara Hill Half Marathon",text:"Run in progress"});
         cordova.plugins.backgroundMode.enable();
+        cordova.plugins.backgroundMode.onactivate = function () {
+              alert("BackgroundMode activated");
+        }
       }
       if(window && window.plugins)
         window.plugins.insomnia.keepAwake();
       speechService.announceMessage("Run Started");
+      
       $timeout(function() {
         ionicMaterialMotion.fadeSlideIn({
             selector: '.animate-fade-slide-in .item'
@@ -213,7 +270,7 @@ angular.module('marathonpacers.activerun.controllers', [])
 
     function onChange(newPosition) {
 
-        $scope.session.runner.runTo(newPosition);
+          $scope.session.runner.runTo(newPosition);
         
         
     }
